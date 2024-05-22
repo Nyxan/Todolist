@@ -24,6 +24,11 @@ class TaskUpdateView(generic.UpdateView):
     success_url = reverse_lazy("list:index")
 
 
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("list:index")
+
+
 class TagsList(generic.ListView):
     model = Tag
     context_object_name = "tags"
@@ -47,8 +52,8 @@ class TagDeleteView(generic.DeleteView):
     success_url = reverse_lazy("list:tag-list")
 
 
-def toggle_status(request, task_id):
-    task = get_object_or_404(Task, pk=task_id)
+def toggle_status(request, pk):
+    task = get_object_or_404(Task, pk=pk)
     task.is_done = not task.is_done
     task.save()
     return redirect("list:index")
