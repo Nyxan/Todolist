@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Tag List
+  </h1>
+  {% if manufacturer_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for tag in tags %}
+        <tr>
+          <td>
+              {{ tag.id }}
+          </td>
+          <td>
+              {{ manufacturer.name }}
+          </td>
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no tags in the list.</p>
+  {% endif %}
+{% endblock %}

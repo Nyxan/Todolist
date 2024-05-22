@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from list.forms import TaskForm
-from list.models import Task
+from list.models import Task, Tag
 
 
 def index(request):
@@ -21,3 +21,9 @@ class TaskUpdateView(generic.UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy("list:index")
+
+
+class TagsList(generic.ListView):
+    model = Tag
+    context_object_name = "tags"
+    template_name = "list/tag_list.html"
