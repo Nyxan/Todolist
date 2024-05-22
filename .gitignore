@@ -1,5 +1,0 @@
-db.sqlite3
-list/migrations/
-.idea
-.venv
-__pycache__
