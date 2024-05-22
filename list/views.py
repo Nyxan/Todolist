@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -27,3 +27,10 @@ class TagsList(generic.ListView):
     model = Tag
     context_object_name = "tags"
     template_name = "list/tag_list.html"
+
+
+def toggle_status(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.done = not task.done
+    task.save()
+    return redirect("list:index")
