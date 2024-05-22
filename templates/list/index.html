@@ -10,14 +10,14 @@
       {% for task in tasks %}
         <li>
           <strong>{{ task.content }}</strong> {{ task.done|yesno:"Done,Not done" }}<br>
-          Created: {{ task.created }}<br>
+          Created: {{ task.created_at }}<br>
           {% if task.deadline %}Deadline: {{ task.deadline }}<br>{% endif %}
           Tags: {% for tag in task.tags.all %}{{ tag.name }} {% endfor %}
-          <a href="{% url 'list:update-task' task.id %}" class="btn btn-primary">Update</a>
-          {% if task.done %}
-            <a href="{% url 'toggle_status' task.id %}">Undo</a>
+          <a href="{% url 'list:task-update' task.id %}" class="btn btn-primary">Update</a>
+          {% if task.is_done %}
+            <a href="{% url 'list:toggle-status' task.id %}">Undo</a>
           {% else %}
-            <a href="{% url 'toggle_status' task.id %}">Complete</a>
+            <a href="{% url 'list:toggle-status' task.id %}">Complete</a>
           {% endif %}
         </li>
       {% endfor %}

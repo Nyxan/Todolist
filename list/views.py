@@ -29,8 +29,20 @@ class TagsList(generic.ListView):
     template_name = "list/tag_list.html"
 
 
+class TagCreateView(generic.CreateView):
+    model = Tag
+    fields = ["name"]
+    success_url = reverse_lazy("list:tag-list")
+
+
+class TagsUpdateView(generic.UpdateView):
+    model = Tag
+    fields = ["name"]
+    success_url = reverse_lazy("list:tag-list")
+
+
 def toggle_status(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
-    task.done = not task.done
+    task.is_done = not task.is_done
     task.save()
     return redirect("list:index")

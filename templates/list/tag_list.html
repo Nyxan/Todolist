@@ -3,31 +3,36 @@
 {% block content %}
   <h1>
     Tag List
+    <a href="{% url 'list:tag-add' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
   </h1>
-  {% if manufacturer_list %}
+  {% if tags %}
     <table class="table">
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Country</th>
         <th>Update</th>
-        <th>Delete</th>
       </tr>
 
       {% for tag in tags %}
         <tr>
           <td>
-              {{ tag.id }}
+            {{ tag.id }}
           </td>
           <td>
-              {{ manufacturer.name }}
+            {{ tag.name }}
           </td>
-            </td>
+          <td>
+              <a href="{% url 'list:task-update' pk=tag.id %}">
+                Update
+              </a>
+          </td>
         </tr>
       {% endfor %}
     </table>
 
   {% else %}
-      <p>There are no tags in the list.</p>
+    <p>There are no tags in the list.</p>
   {% endif %}
 {% endblock %}
