@@ -8,7 +8,8 @@ from list.models import Task, Tag
 
 def index(request):
     tasks = Task.objects.all().order_by("is_done", "-created_at")
-    return render(request, "list/index.html", {"tasks": tasks})
+    context = {"tasks": tasks}
+    return render(request, "list/index.html", context=context)
 
 
 class TaskCreateView(generic.CreateView):
@@ -38,6 +39,11 @@ class TagCreateView(generic.CreateView):
 class TagsUpdateView(generic.UpdateView):
     model = Tag
     fields = ["name"]
+    success_url = reverse_lazy("list:tag-list")
+
+
+class TagDeleteView(generic.DeleteView):
+    model = Tag
     success_url = reverse_lazy("list:tag-list")
 
 
